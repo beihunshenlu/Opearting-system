@@ -1,0 +1,39 @@
+这篇文章记录写OS过程中遇到的问题以及解决办法，包括一些第一次遇到的函数的解析。
+
+getopt()函数：这个函数是对命令行参数的解析，函数定义：
+int getopt(int argc,char * const argv[ ],const char * optstring);
+
+直接举例子：
+
+#include <stdio.h>
+#include <unistd.h>
+
+int main (int argc, char **argv)
+{
+    int oc;                     /*选项字符 */
+    char *b_opt_arg;            /*选项参数字串 */
+
+    while((oc = getopt(argc, argv, "ngl:")) != -1)
+    {
+        switch(oc)
+        {
+            case 'n':
+                printf("My name is Lyong.\n");
+                break;
+            case 'g':
+                printf("Her name is Xxiong.\n");
+                break;
+            case 'l':
+                b_opt_arg = optarg;
+                printf("Our love is %s\n", optarg);
+                break;
+        }
+    }
+   return 0;
+}
+
+编译链接后保存到test可执行文件中，运行：
+./test -n 或
+./test -g 或
+./test -l
+冒号的意思是-l参数后需要添加内容
