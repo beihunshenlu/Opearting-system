@@ -1,17 +1,17 @@
-��ƪ���¼�¼дOS�����������������Լ�����취������һЩ��һ�������ĺ����Ľ�����
+这篇文章记录写OS过程中遇到的问题以及解决办法，包括一些第一次遇到的函数的解析。
 
-getopt()��������������Ƕ������в����Ľ������������壺
+getopt()函数：这个函数是对命令行参数的解析，函数定义：
 int getopt(int argc,char * const argv[ ],const char * optstring);
 
-ֱ�Ӿ����ӣ�
+直接举例子：
 
 #include <stdio.h>
 #include <unistd.h>
 
 int main (int argc, char **argv)
 {
-    int oc;                     /*ѡ���ַ� */
-    char *b_opt_arg;            /*ѡ������ִ� */
+    int oc;                     /*选项字符 */
+    char *b_opt_arg;            /*选项参数字串 */
 
     while((oc = getopt(argc, argv, "ngl:")) != -1)
     {
@@ -32,8 +32,19 @@ int main (int argc, char **argv)
    return 0;
 }
 
-�������Ӻ󱣴浽test��ִ���ļ��У����У�
-./test -n ��
-./test -g ��
+编译链接后保存到test可执行文件中，运行：
+./test -n 或
+./test -g 或
 ./test -l
-ð�ŵ���˼��-l��������Ҫ��������
+冒号的意思是-l参数后需要添加内容
+
+
+
+
+
+
+
+记录一下，今天完成了PA1阶段，过程挺难的，而且也没有实现全部的功能，列一下以后写代码时需要注意的几点：字符数组的使用要用相应函数，static声明的变量只能在本文件中使用(这个是之前的知识点)，使用extern可以使用其他*.c文件中的变量。
+经过第一阶段，唤醒了很多尘封已久的C语言知识点，收获也挺多的。
+
+2017/11/5
